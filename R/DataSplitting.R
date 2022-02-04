@@ -220,6 +220,9 @@ splitData <- function(plpData = plpData,
       )
   }
   
+  # duplicate folds for train and validation
+  result$Train$folds <- list(train = result$Train$folds, validation = result$Train$folds)
+  
   class(result) <- 'splitData'
   return(result)
 }
@@ -230,21 +233,41 @@ dataSummary <- function(data){
   
   ParallelLogger::logInfo('Train Set:')
   result <- data$Train$labels %>% 
-    dplyr::inner_join(data$Train$folds, by = .data$rowId) %>% 
+    dplyr::inner_join(data$Train$folds$train, by = "rowId") %>% 
     dplyr::group_by(.data$index) %>%
     dplyr::summarise(N = length(.data$outcomeCount),
-      outcomes = sum(.data$outcomeCount)) %>% 
+      outcomes = sum(.data$outcomeCount), .groups = 'drop') %>% 
     dplyr::collect()
   
   ParallelLogger::logInfo(paste('Fold ', result$index ,' ', result$N, ' patients with ', result$outcomes, ' outcomes', sep ='', collapse = ' - '))
   
   
   result <- data$Train$covariateData$covariates %>% 
+    collect() %>%
+    dplyr::inner_join(data$Train$folds$train, by = "rowId") %>%
     dplyr::group_by(.data$covariateId) %>% 
-    dplyr::summarise(N = length(.data$covariateValue)) %>% 
+    dplyr::summarise(N = length(.data$covariateValue), .groups = 'drop')
+
+  ParallelLogger::logInfo(paste0(nrow(result), ' covariates in train data'))
+  
+  ParallelLogger::logInfo('Validation Set:')
+  result <- data$Train$labels %>% 
+    dplyr::inner_join(data$Train$folds$validation, by = "rowId") %>% 
+    dplyr::group_by(.data$index) %>%
+    dplyr::summarise(N = length(.data$outcomeCount),
+                     outcomes = sum(.data$outcomeCount), .groups = 'drop') %>% 
     dplyr::collect()
   
-  ParallelLogger::logInfo(paste0(nrow(result), ' covariates in train data'))
+  ParallelLogger::logInfo(paste('Fold ', result$index ,' ', result$N, ' patients with ', result$outcomes, ' outcomes', sep ='', collapse = ' - '))
+  
+  
+  result <- data$Train$covariateData$covariates %>% 
+    dplyr::collect() %>% 
+    dplyr::inner_join(data$Train$folds$validation, by = "rowId") %>% 
+    dplyr::group_by(.data$covariateId) %>% 
+    dplyr::summarise(N = length(.data$covariateValue), , .groups = 'drop')
+  
+  ParallelLogger::logInfo(paste0(nrow(result), ' covariates in validation data'))
   
   if('Test' %in% names(data)){
     ParallelLogger::logInfo('Test Set:')

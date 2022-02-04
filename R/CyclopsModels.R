@@ -24,6 +24,8 @@ fitCyclopsModel <- function(
   analysisId,
   ...){
   
+  trainData$folds <- trainData$folds$train
+    
   # check plpData is coo format:
   if (!FeatureExtraction::isCovariateData(trainData$covariateData)){
     stop("Needs correct covariateData")

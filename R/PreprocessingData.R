@@ -62,10 +62,17 @@ createPreprocessSettings <- function(
 #' @param preprocessSettings    The settings for the preprocessing created by \code{createPreprocessSettings}                    
 #' @return
 #' The data processed 
-preprocessData <- function (covariateData, 
+preprocessData <- function (trainData, 
                             preprocessSettings){
   
-  metaData <- attr(covariateData, "metaData")
+  covariateData <- Andromeda::andromeda(covariateRef = trainData$covariateData$covariateRef,
+                                           analysisRef =  trainData$covariateData$analysisRef)
+  covariateData$covariates <- trainData$covariateData$covariates %>% collect() %>%
+    dplyr::inner_join(trainData$folds$train, by = "rowId")
+    
+  metaData <- attr(trainData$covariateData, "metaData")
+  attr(covariateData, "metaData") <- metaData
+  class(covariateData) <- "CovariateData"
   
   checkIsClass(covariateData, c("CovariateData"))
   checkIsClass(preprocessSettings, c("preprocessSettings"))
@@ -77,16 +84,16 @@ preprocessData <- function (covariateData,
   preprocessSettings$covariateData <- covariateData
   covariateData <- do.call(FeatureExtraction::tidyCovariateData, preprocessSettings)
   
-  #update covariateRed
-  removed <- unique(
-    attr(covariateData, "metaData")$deletedInfrequentCovariateIds,
-    attr(covariateData, "metaData")$deletedRedundantCovariateIds
-    )
-  covariateData$covariateRef <- covariateData$covariateRef %>% 
-    dplyr::filter(!.data$covariateId  %in% removed)
-  
   metaData$tidyCovariateDataSettings <- attr(covariateData, "metaData")
-  attr(covariateData, "metaData") <- metaData
   
-  return(covariateData)
+  trainData$covariateData <- do.call(
+    applyTidyCovariateData, 
+    list(
+      covariateData = trainData$covariateData,
+      preprocessSettings = metaData$tidyCovariateDataSettings
+    )
+  )
+  attr(trainData$covariateData, "metaData") <- metaData
+  
+  return(trainData)
 }

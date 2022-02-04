@@ -23,6 +23,8 @@ fitSklearn <- function(
   analysisId,
   ...) {
   
+  trainData$folds <- trainData$folds$train
+  
   # check covariate data
   if(!FeatureExtraction::isCovariateData(trainData$covariateData)){stop("Needs correct covariateData")}
   

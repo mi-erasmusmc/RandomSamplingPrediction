@@ -340,16 +340,17 @@ runPlp <- function(
   
   if(executeSettings$runPreprocessData){
     
-    data$Train$covariateData <- tryCatch(
+    data$Train <- tryCatch(
       {
         preprocessData(
-          covariateData = data$Train$covariateData, 
+          # covariateData = data$Train$covariateData,
+          trainData = data$Train, 
           preprocessSettings = preprocessSettings
         )
       },
       error = function(e){ParallelLogger::logError(e); return(NULL)}
     )
-    if(is.null(data$Train$covariateData)){
+    if(is.null(data$Train)){
       stop('train data NULL after preprocessing')
     }
     dataSummary(data)
@@ -421,17 +422,17 @@ runPlp <- function(
     if(!is.null(data$Test)){
       strata <- data.frame(
         rowId = c(
-          data$Train$labels$rowId, 
+          data$Train$folds$train$rowId,
           data$Test$labels$rowId 
         ),
         strataName = c(
-          rep('Train', nrow(data$Train$labels)), 
+          rep('Train', nrow(data$Train$folds$train)), 
           rep('Test', nrow(data$Test$labels))
         )
       )
     } else{
       strata <- data.frame(
-        rowId = c( data$Train$labels$rowId ),
+        rowId = c( data$Train$folds$train$rowId ),
         strataName = c( rep('Train', nrow(data$Train$labels)) )
       )
     }
