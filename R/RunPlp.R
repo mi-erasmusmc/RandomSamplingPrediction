@@ -343,7 +343,6 @@ runPlp <- function(
     data$Train <- tryCatch(
       {
         preprocessData(
-          # covariateData = data$Train$covariateData,
           trainData = data$Train, 
           preprocessSettings = preprocessSettings
         )

@@ -24,6 +24,7 @@ fitCyclopsModel <- function(
   analysisId,
   ...){
   
+  # currently not possible to separate train and validation folds for Cyclops
   trainData$folds <- trainData$folds$train
     
   # check plpData is coo format:

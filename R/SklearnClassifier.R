@@ -23,6 +23,7 @@ fitSklearn <- function(
   analysisId,
   ...) {
   
+  # currently not possible to separate train and validation folds for Sklearn
   trainData$folds <- trainData$folds$train
   
   # check covariate data

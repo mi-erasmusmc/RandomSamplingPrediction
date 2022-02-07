@@ -5,10 +5,12 @@ fitRclassifier <- function(trainData, param, search = 'grid', analysisId){
     stop("Needs correct covariateData")
   }
   
-  
+  # need this for computeGridPerformance
   # add folds to labels if present:
-  if(!is.null(trainData$folds)){
-    trainData$labels <- merge(trainData$labels, trainData$folds, by = 'rowId')
+  if(!is.null(trainData$folds$validation)){
+    trainData$labels <- merge(trainData$labels, 
+                              merge(trainData$folds$train, trainData$folds$validation, all=TRUE),
+                              by = 'rowId', all = TRUE)
   }
   
   settings <- attr(param, 'settings')
@@ -34,7 +36,8 @@ fitRclassifier <- function(trainData, param, search = 'grid', analysisId){
     dataMatrix, 
     labels, 
     hyperparamGrid = param, 
-    covariateMap = result$covariateMap
+    covariateMap = result$covariateMap,
+    folds = trainData$folds
     )
   
   hyperSummary <- do.call(rbind, lapply(cvResult$paramGridSearch, function(x) x$hyperSummary))
@@ -96,7 +99,7 @@ fitRclassifier <- function(trainData, param, search = 'grid', analysisId){
 
 
 
-applyCrossValidationInR <- function(dataMatrix, labels, hyperparamGrid, covariateMap){
+applyCrossValidationInR <- function(dataMatrix, labels, hyperparamGrid, covariateMap, folds){
   
   gridSearchPredictions <- list()
   length(gridSearchPredictions) <- length(hyperparamGrid)
@@ -106,15 +109,16 @@ applyCrossValidationInR <- function(dataMatrix, labels, hyperparamGrid, covariat
     param <- hyperparamGrid[[gridId]]
     
     cvPrediction <- c()
-    for(i in unique(labels$index)){
+    for(i in unique(folds$train$index)){
       
-      ind <- labels$index != i
+      trainIds <- labels$originalRowId %in% folds$train[folds$train$index != i,]$rowId
+      validationIds <- labels$originalRowId %in% folds$validation[folds$validation$index == i,]$rowId
       
       model <- do.call(
         attr(hyperparamGrid, 'settings')$trainRFunction, 
         list(
-          dataMatrix = dataMatrix[ind,],
-          labels = labels[ind,],
+          dataMatrix = dataMatrix[trainIds,],
+          labels = labels[trainIds,],
           hyperParameters = param,
           settings = attr(hyperparamGrid, 'settings')
         )  
@@ -126,8 +130,8 @@ applyCrossValidationInR <- function(dataMatrix, labels, hyperparamGrid, covariat
           attr(hyperparamGrid, 'settings')$predictRFunction, 
           list(
             plpModel = model,
-            data = dataMatrix[!ind,],
-            cohort = labels[!ind,]
+            data = dataMatrix[validationIds,],
+            cohort = labels[validationIds,]
           )  
         )
       )
@@ -155,11 +159,14 @@ applyCrossValidationInR <- function(dataMatrix, labels, hyperparamGrid, covariat
   
   # fit final model
   
+  trainIds <- labels$originalRowId %in% folds$train$rowId
+  validationIds <- labels$originalRowId %in% folds$validation$rowId
+  
   finalModel <- do.call(
     attr(hyperparamGrid, 'settings')$trainRFunction, 
     list(
-      dataMatrix = dataMatrix,
-      labels = labels,
+      dataMatrix = dataMatrix[trainIds,],
+      labels = labels[trainIds,],
       hyperParameters = finalParam,
       settings = attr(hyperparamGrid, 'settings')
     )  
@@ -169,8 +176,8 @@ applyCrossValidationInR <- function(dataMatrix, labels, hyperparamGrid, covariat
     attr(hyperparamGrid, 'settings')$predictRFunction, 
     list(
       plpModel = finalModel,
-      data = dataMatrix,
-      cohort = labels
+      data = dataMatrix[validationIds,],
+      cohort = labels[validationIds,]
     )  
   )
   
