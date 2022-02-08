@@ -59,6 +59,7 @@ test_that("createPreprocessSettings", {
 
 test_that("createPreprocessSettings", {
   trainData <- createTrainData(plpData, population)
+  trainData$folds <- list(train = trainData$folds, validation = trainData$folds)
   
   metaData <- attr(trainData$covariateData, "metaData")
   covSize <- trainData$covariateData$covariates %>% dplyr::tally() %>% dplyr::pull()
@@ -70,37 +71,38 @@ test_that("createPreprocessSettings", {
     normalizeData = F,
     removeRedundancy = F
   )
-  newData <- preprocessData(trainData$covariateData, preprocessSettings)
+  newData <- preprocessData(trainData, preprocessSettings)
   
-  expect_is(newData, 'CovariateData')
-  expect_equal(length(attr(newData, "metaData")), 1+length(metaData))
-  expect_true(newData$covariates %>% dplyr::tally() %>% dplyr::pull() < covSize)
+  expect_is(newData$covariateData, 'CovariateData')
+  expect_equal(length(attr(newData$covariateData, "metaData")), 1+length(metaData))
+  expect_true(newData$covariateData$covariates %>% dplyr::tally() %>% dplyr::pull() < covSize)
   
   # metaData should have tidyCovariateDataSettings (so 1 bigger)
-  expect_equal(length(attr(newData, "metaData")), metaLength+1)
+  expect_equal(length(attr(newData$covariateData, "metaData")), metaLength+1)
   
-  expect_true(length(attr(newData, "metaData")$tidyCovariateDataSettings$deletedInfrequentCovariateIds)>=0)
-  expect_equal(attr(newData, "metaData")$tidyCovariateDataSettings$deletedRedundantCovariateIds, NULL)
-  expect_equal(attr(newData, "metaData")$tidyCovariateDataSettings$normFactors, NULL)
+  expect_true(length(attr(newData$covariateData, "metaData")$tidyCovariateDataSettings$deletedInfrequentCovariateIds)>=0)
+  expect_equal(attr(newData$covariateData, "metaData")$tidyCovariateDataSettings$deletedRedundantCovariateIds, NULL)
+  expect_equal(attr(newData$covariateData, "metaData")$tidyCovariateDataSettings$normFactors, NULL)
   
-  newFeatureCount <- newData$covariateRef %>% dplyr::tally() %>% dplyr::pull() + length(attr(newData, "metaData")$tidyCovariateDataSettings$deletedInfrequentCovariateIds)
+  newFeatureCount <- newData$covariateData$covariateRef %>% dplyr::tally() %>% dplyr::pull() + length(attr(newData$covariateData, "metaData")$tidyCovariateDataSettings$deletedInfrequentCovariateIds)
   
   expect_equal(newFeatureCount, oldFeatureCount)
   
   trainData <- createTrainData(plpData, population)
+  trainData$folds <- list(train = trainData$folds, validation = trainData$folds)
   metaData <- attr(trainData$covariateData, "metaData")
   preprocessSettings <- createDefaultSettings(
     minCovariateFraction = 0,
     normalizeData = T,
     removeRedundancy = T
   )
-  newData <- preprocessData(trainData$covariateData, preprocessSettings)
-  expect_true(length(attr(newData, "metaData")$tidyCovariateDataSettings$deletedInfrequentCovariateIds)==0)
-  expect_true(length(attr(newData, "metaData")$tidyCovariateDataSettings$deletedRedundantCovariateIds)>=0)
-  expect_true(length(attr(newData, "metaData")$tidyCovariateDataSettings$normFactors)>=0)
+  newData <- preprocessData(trainData, preprocessSettings)
+  expect_true(length(attr(newData$covariateData, "metaData")$tidyCovariateDataSettings$deletedInfrequentCovariateIds)==0)
+  expect_true(length(attr(newData$covariateData, "metaData")$tidyCovariateDataSettings$deletedRedundantCovariateIds)>=0)
+  expect_true(length(attr(newData$covariateData, "metaData")$tidyCovariateDataSettings$normFactors)>=0)
   
-  newFeatureCount <- newData$covariateRef %>% dplyr::tally() %>% dplyr::pull() + 
-    length(attr(newData, "metaData")$tidyCovariateDataSettings$deletedRedundantCovariateIds) 
+  newFeatureCount <- newData$covariateData$covariateRef %>% dplyr::tally() %>% dplyr::pull() + 
+    length(attr(newData$covariateData, "metaData")$tidyCovariateDataSettings$deletedRedundantCovariateIds) 
   
   expect_equal(newFeatureCount, oldFeatureCount)
   

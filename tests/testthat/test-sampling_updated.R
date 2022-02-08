@@ -137,6 +137,7 @@ test_that("sampleData outputs are correct", {
 test_that("underSampleData works", {
   
   trainData <- createTrainData(plpData, population)
+  trainData$folds <- list(train = trainData$folds, validation = trainData$folds)
   
   sampleSettings <- list(
     sampleSeed = 1,
@@ -146,12 +147,12 @@ test_that("underSampleData works", {
   underSampleData <- underSampleData(trainData, sampleSettings)
   
   # the sampled data should be smaller...
-  expect_true(nrow(underSampleData$labels) <= nrow(trainData$labels))
+  expect_true(nrow(underSampleData$labels) == nrow(trainData$labels))
   
-  expect_true(nrow(underSampleData$folds) <= nrow(trainData$folds))
+  expect_true(nrow(underSampleData$folds$train) <= nrow(trainData$folds$train))
   
   expect_true(
-    underSampleData$covariateData$covariates %>% dplyr::tally() %>% dplyr::pull() <= trainData$covariateData$covariates  %>% dplyr::tally() %>% dplyr::pull()
+    underSampleData$covariateData$covariates %>% dplyr::tally() %>% dplyr::pull() == trainData$covariateData$covariates  %>% dplyr::tally() %>% dplyr::pull()
   )
   
   # perhaps add manual data test
@@ -162,6 +163,7 @@ test_that("underSampleData works", {
 test_that("overSampleData works", {
   
   trainData <- createTrainData(plpData, population)
+  trainData$folds <- list(train = trainData$folds, validation = trainData$folds)
   
   sampleSettings <- list(
     sampleSeed = 1,
@@ -173,7 +175,7 @@ test_that("overSampleData works", {
   # the sampled data should be smaller...
   expect_true(nrow(overSampleData$labels) >= nrow(trainData$labels))
   
-  expect_true(nrow(overSampleData$folds) >= nrow(trainData$folds))
+  expect_true(nrow(overSampleData$folds$train) >= nrow(trainData$folds$train))
   
   expect_true(
     overSampleData$covariateData$covariates %>% dplyr::tally() %>% dplyr::pull() >= trainData$covariateData$covariates  %>% dplyr::tally() %>% dplyr::pull()

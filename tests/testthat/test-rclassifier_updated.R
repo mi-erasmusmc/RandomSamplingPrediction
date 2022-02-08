@@ -79,6 +79,7 @@ testthat::expect_error(setGradientBoostingMachine(seed = 'F'))
 test_that("GBM working checks", {
   
   trainData <- createTrainData(plpData = plpData, population = population)
+  trainData$folds <- list(train = trainData$folds, validation = trainData$folds)
   modelSettings <- setGradientBoostingMachine(ntrees = 10, maxDepth = 3, learnRate = 0.1)
   
   fitModel <- fitPlp(

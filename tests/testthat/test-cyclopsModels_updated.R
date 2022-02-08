@@ -240,6 +240,7 @@ test_that("test logistic regression runs", {
 
 modelSettings <- setLassoLogisticRegression()
 trainData <- createTrainData(plpData, population)
+trainData$folds <- list(train = trainData$folds, validation = trainData$folds)
 
 fitModel <- fitPlp(
   trainData = trainData,   

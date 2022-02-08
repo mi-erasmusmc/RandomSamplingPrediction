@@ -197,14 +197,25 @@ test_that("Main split function: splitData", {
     plpData$covariateData$covariates %>% dplyr::tally() %>% dplyr::pull()
   )
   
-  # make sure nfolds is correct
+  # make sure nfolds is correct for train
   expect_equal(
-    min(splitData$Train$folds$index),
+    min(splitData$Train$folds$train$index),
     1
   )
   
   expect_equal(
-    max(splitData$Train$folds$index),
+    max(splitData$Train$folds$train$index),
+    splitSettings$nfold
+  )
+  
+  # make sure nfolds is correct for validation
+  expect_equal(
+    min(splitData$Train$folds$validation$index),
+    1
+  )
+  
+  expect_equal(
+    max(splitData$Train$folds$validation$index),
     splitSettings$nfold
   )
   

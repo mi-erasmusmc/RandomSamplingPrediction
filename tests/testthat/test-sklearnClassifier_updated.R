@@ -65,6 +65,7 @@ test_that("check fit of DecisionTree", {
     plpData = plpData, 
     population = population
     )
+  trainData$folds <- list(train = trainData$folds, validation = trainData$folds)
   
   plpModel <- fitPlp(
     trainData = trainData, 
