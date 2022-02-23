@@ -67,16 +67,17 @@ setGradientBoostingMachine <- function(ntrees=c(100, 1000), nthread=20, earlySto
   param <- split(
     expand.grid(
       ntrees=ntrees, 
-      earlyStopRound=earlyStopRound,
+      # earlyStopRound=earlyStopRound,
       maxDepth=maxDepth, 
       minRows=minRows, 
       learnRate=learnRate
       ),
-    1:(length(ntrees)*length(maxDepth)*length(minRows)*length(learnRate)*length(earlyStopRound))
+    1:(length(ntrees)*length(maxDepth)*length(minRows)*length(learnRate))
   )
   
   attr(param, 'settings') <- list(
-    modeType = 'Xgboost',
+    modelType = 'Xgboost',
+    earlyStopRound = earlyStopRound,
     seed = seed[[1]],
     modelName = "Gradient Boosting Machine",
     threads = nthread[1],
@@ -169,7 +170,7 @@ fitXgboost <- function(
   settings
   ){
   
-  if(!is.null(hyperParameters$earlyStopRound)){
+  if(!is.null(settings$earlyStopRound)){
     trainInd <- sample(nrow(dataMatrix), nrow(dataMatrix)*0.9)
     train <- xgboost::xgb.DMatrix(
       data = dataMatrix[trainInd,, drop = F], 
@@ -186,7 +187,7 @@ fitXgboost <- function(
       data = dataMatrix, 
       label = labels$outcomeCount
     )
-    watchlist <- list()
+    watchlist <- list(train = train)
   }
   
   outcomes <- sum(labels$outcomeCount>0)
@@ -213,7 +214,7 @@ fitXgboost <- function(
     nrounds = hyperParameters$ntrees,
     watchlist = watchlist,
     print_every_n = 10,
-    early_stopping_rounds = hyperParameters$earlyStopRound,
+    early_stopping_rounds = settings$earlyStopRound,
     maximize = T,
     weight = weights # add weights to improve model
     )
