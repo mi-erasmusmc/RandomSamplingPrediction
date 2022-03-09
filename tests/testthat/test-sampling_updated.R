@@ -99,32 +99,32 @@ test_that("sampleData outputs are correct", {
   
   sampleSettings <- sampleSettingFunc(type = 'none') 
   
-  sampleData <- sampleData(trainData, sampleSettings)
+  sampleTrainData <- sampleData(trainData, sampleSettings)
   
   # make sure metaData captures
   expect_equal(
-    length(attr(sampleData, "metaData")),
+    length(attr(sampleTrainData, "metaData")),
     length(attr(trainData, "metaData"))+1
   )
   
   expect_equal(
-    attr(sampleData, "metaData")$sampleSettings,
+    attr(sampleTrainData, "metaData")$sampleSettings,
     sampleSettings
   )
   
   # check the data is the same:
   expect_equal(
-    nrow(sampleData$labels), 
+    nrow(sampleTrainData$labels), 
     nrow(trainData$labels)
   )
   
   expect_equal(
-    nrow(sampleData$folds), 
+    nrow(sampleTrainData$folds), 
     nrow(trainData$folds)
   )
   
   expect_equal(
-    sampleData$covariateData$covariates %>% dplyr::tally() %>% dplyr::pull(), 
+    sampleTrainData$covariateData$covariates %>% dplyr::tally() %>% dplyr::pull(), 
     trainData$covariateData$covariates  %>% dplyr::tally() %>% dplyr::pull()
   )
   
@@ -144,15 +144,49 @@ test_that("underSampleData works", {
     numberOutcomestoNonOutcomes = 1
     )
   
-  underSampleData <- underSampleData(trainData, sampleSettings)
+  sampleTrainData <- underSampleData(trainData, sampleSettings)
   
-  # the sampled data should be smaller...
-  expect_true(nrow(underSampleData$labels) == nrow(trainData$labels))
+  expect_true(nrow(sampleTrainData$labels) == nrow(trainData$labels))
   
-  expect_true(nrow(underSampleData$folds$train) <= nrow(trainData$folds$train))
-  
+  # the sampled train folds data should be smaller...
   expect_true(
-    underSampleData$covariateData$covariates %>% dplyr::tally() %>% dplyr::pull() == trainData$covariateData$covariates  %>% dplyr::tally() %>% dplyr::pull()
+    2*sum((sampleTrainData$label %>% dplyr::filter(.data$rowId %in% sampleTrainData$folds$train$rowId))$outcomeCount) == nrow(sampleTrainData$folds$train)
+  )
+  
+  expect_true(nrow(sampleTrainData$folds$train) <= nrow(trainData$folds$train))
+  expect_true(nrow(sampleTrainData$folds$train) <= nrow(trainData$folds$validation))
+  expect_true(nrow(sampleTrainData$folds$validation) == nrow(trainData$folds$validation))
+  expect_true(sum(sampleTrainData$folds$validation == trainData$folds$validation)==2*nrow(trainData$folds$validation))
+  
+  # the sampled train folds data should be a subset of the validation folds data...
+  expect_true(nrow(sampleTrainData$folds$train %>% dplyr::filter(.data$rowId%in%trainData$folds$train$rowId))==nrow(sampleTrainData$folds$train))
+  expect_true(nrow(sampleTrainData$folds$train %>% dplyr::filter(.data$rowId%in%trainData$folds$validation$rowId))==nrow(sampleTrainData$folds$train))
+
+  expect_true(
+    sampleTrainData$covariateData$covariates %>% dplyr::tally() %>% dplyr::pull() == trainData$covariateData$covariates  %>% dplyr::tally() %>% dplyr::pull()
+  )
+  
+  # test setting numberOutcomestoNonOutcomes = 0: the sampled data should be same as input
+  
+  sampleSettings <- list(
+    sampleSeed = 1,
+    numberOutcomestoNonOutcomes = 0
+  )
+  sampleTrainData <- underSampleData(trainData, sampleSettings)
+  
+  expect_equal(
+    nrow(sampleTrainData$labels), 
+    nrow(trainData$labels)
+  )
+  
+  expect_equal(
+    nrow(sampleTrainData$folds$train), 
+    nrow(trainData$folds$train)
+  )
+  
+  expect_equal(
+    sampleTrainData$covariateData$covariates %>% dplyr::tally() %>% dplyr::pull(), 
+    trainData$covariateData$covariates  %>% dplyr::tally() %>% dplyr::pull()
   )
   
   # perhaps add manual data test
@@ -167,18 +201,52 @@ test_that("overSampleData works", {
   
   sampleSettings <- list(
     sampleSeed = 1,
-    numberOutcomestoNonOutcomes = 0.1
+    numberOutcomestoNonOutcomes = 1
   )
   
-  overSampleData <- overSampleData(trainData, sampleSettings)
+  sampleTrainData <- overSampleData(trainData, sampleSettings)
   
-  # the sampled data should be smaller...
-  expect_true(nrow(overSampleData$labels) >= nrow(trainData$labels))
+  # the sampled data should be larger with unique rowIds
+  expect_true(2*sum(sampleTrainData$labels$outcomeCount) == nrow(sampleTrainData$labels))
+
+  expect_true(nrow(sampleTrainData$labels) >= nrow(trainData$labels))
+  expect_true(length(unique(sampleTrainData$labels$rowId))==nrow(sampleTrainData$labels))
   
-  expect_true(nrow(overSampleData$folds$train) >= nrow(trainData$folds$train))
+  expect_true(nrow(sampleTrainData$folds$train) >= nrow(trainData$folds$train))
+  expect_true(length(unique(sampleTrainData$folds$train$rowId))==nrow(sampleTrainData$folds$train))
+  expect_true(nrow(sampleTrainData$folds$train) >= nrow(trainData$folds$validation))
+  expect_true(nrow(sampleTrainData$folds$validation) == nrow(trainData$folds$validation))
+  expect_true(sum(sampleTrainData$folds$validation == trainData$folds$validation)==2*nrow(trainData$folds$validation))
   
+  # the validation folds data should be a subset of the sampled train folds data...
+  expect_true(nrow(sampleTrainData$folds$validation %>% dplyr::filter(.data$rowId%in%trainData$folds$train$rowId))==nrow(sampleTrainData$folds$validation))
+  expect_true(nrow(sampleTrainData$folds$validation %>% dplyr::filter(.data$rowId%in%trainData$folds$validation$rowId))==nrow(sampleTrainData$folds$validation))
+
   expect_true(
-    overSampleData$covariateData$covariates %>% dplyr::tally() %>% dplyr::pull() >= trainData$covariateData$covariates  %>% dplyr::tally() %>% dplyr::pull()
+  sampleTrainData$covariateData$covariates %>% dplyr::tally() %>% dplyr::pull() >= trainData$covariateData$covariates  %>% dplyr::tally() %>% dplyr::pull()
+  )
+  
+  # test setting numberOutcomestoNonOutcomes = 0: the sampled data should be same as input
+  
+  sampleSettings <- list(
+    sampleSeed = 1,
+    numberOutcomestoNonOutcomes = 0
+  )
+  sampleTrainData <- overSampleData(trainData, sampleSettings)
+    
+  expect_equal(
+    nrow(sampleTrainData$labels), 
+    nrow(trainData$labels)
+  )
+  
+  expect_equal(
+    nrow(sampleTrainData$folds$train), 
+    nrow(trainData$folds$train)
+  )
+  
+  expect_equal(
+    sampleTrainData$covariateData$covariates %>% dplyr::tally() %>% dplyr::pull(), 
+    trainData$covariateData$covariates  %>% dplyr::tally() %>% dplyr::pull()
   )
   
   # perhaps add manual data test
