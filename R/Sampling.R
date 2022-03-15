@@ -219,21 +219,21 @@ overSampleData <- function(trainData, sampleSettings){
       collect() %>%
       right_join(addTrainData$labels[, c("rowId", "newRowId")], by = "rowId") %>% 
       dplyr::mutate(rowId = .data$newRowId) %>% 
-      dplyr::select(-starts_with("newRowId"))
+      dplyr::select(-dplyr::starts_with("newRowId"))
     
     addTrainData$covariateData <- Andromeda::andromeda()
     addTrainData$covariateData$covariates <- trainData$covariateData$covariates %>% dplyr::filter(.data$rowId %in% pplOfInterest) %>% 
       collect() %>%
       dplyr::right_join(addTrainData$labels[, c("rowId", "newRowId")], by = "rowId") %>% 
       dplyr::mutate(rowId = .data$newRowId) %>% 
-      dplyr::select(-starts_with("newRowId"))
+      dplyr::select(-dplyr::starts_with("newRowId"))
       
     addTrainData$labels <- addTrainData$labels %>% dplyr::mutate(rowId = .data$newRowId) %>%
-      dplyr::select(-starts_with("newRowId"))
+      dplyr::select(-dplyr::starts_with("newRowId"))
       
     sampleTrainData$labels <- dplyr::bind_rows(sampleTrainData$labels, addTrainData$labels)
     sampleTrainData$folds$train <- dplyr::bind_rows(sampleTrainData$folds$train, addTrainData$folds)
-    appendToTable(sampleTrainData$covariateData$covariates, addTrainData$covariateData$covariates)
+    Andromeda::appendToTable(sampleTrainData$covariateData$covariates, addTrainData$covariateData$covariates)
   }
   
   #update metaData$populationSize = nrow(trainData$labels)
