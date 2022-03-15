@@ -194,9 +194,9 @@ fitXgboost <- function(
   N <- nrow(labels)
   outcomeProportion <- outcomes/N
   
-  # adding weights
-  weights <- labels$outcomeCount*(N/outcomes)
-  weights[weights == 0] <- 1
+  # # adding weights
+  # weights <- labels$outcomeCount*(N/outcomes)
+  # weights[weights == 0] <- 1
   
   model <- xgboost::xgb.train(
     data = train, 
@@ -207,7 +207,7 @@ fitXgboost <- function(
       min_child_weight = hyperParameters$minRows,
       objective = "binary:logistic",
       #eval.metric = "logloss"
-      base_score = outcomeProportion,
+      # base_score = outcomeProportion,
       eval_metric = "auc"
     ),
     nthread = settings$threads, #?
@@ -215,8 +215,8 @@ fitXgboost <- function(
     watchlist = watchlist,
     print_every_n = 10,
     early_stopping_rounds = settings$earlyStopRound,
-    maximize = T,
-    weight = weights # add weights to improve model
+    maximize = T
+    # weight = weights # add weights to improve model
     )
   
   return(model)
