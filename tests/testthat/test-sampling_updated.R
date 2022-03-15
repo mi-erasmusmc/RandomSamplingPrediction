@@ -223,7 +223,12 @@ test_that("overSampleData works", {
   expect_true(nrow(sampleTrainData$folds$validation %>% dplyr::filter(.data$rowId%in%trainData$folds$validation$rowId))==nrow(sampleTrainData$folds$validation))
 
   expect_true(
-  sampleTrainData$covariateData$covariates %>% dplyr::tally() %>% dplyr::pull() >= trainData$covariateData$covariates  %>% dplyr::tally() %>% dplyr::pull()
+    sampleTrainData$covariateData$covariates %>% dplyr::tally() %>% dplyr::pull() >= trainData$covariateData$covariates %>% dplyr::tally() %>% dplyr::pull()
+  )
+  
+  # check if all rowIds match..
+  expect_true(
+    nrow(sampleTrainData$covariateData$covariates %>% dplyr::collect() %>% dplyr::filter(.data$rowId %in% sampleTrainData$labels$rowId)) == nrow(sampleTrainData$covariateData$covariates)
   )
   
   # test setting numberOutcomestoNonOutcomes = 0: the sampled data should be same as input

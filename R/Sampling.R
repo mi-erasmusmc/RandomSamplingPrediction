@@ -217,14 +217,14 @@ overSampleData <- function(trainData, sampleSettings){
       pplOfInterest <- unique(addTrainData$labels$rowId)
       
       addTrainData$folds <- trainData$folds$train %>% dplyr::filter(.data$rowId %in% pplOfInterest) %>%
-        collect() %>%
+        dplyr::collect() %>%
         right_join(addTrainData$labels[, c("rowId", "newRowId")], by = "rowId") %>% 
         dplyr::mutate(rowId = .data$newRowId) %>% 
         dplyr::select(-dplyr::starts_with("newRowId"))
       
       addTrainData$covariateData <- Andromeda::andromeda()
       addTrainData$covariateData$covariates <- trainData$covariateData$covariates %>% dplyr::filter(.data$rowId %in% pplOfInterest) %>% 
-        collect() %>%
+        dplyr::collect() %>%
         dplyr::right_join(addTrainData$labels[, c("rowId", "newRowId")], by = "rowId") %>% 
         dplyr::mutate(rowId = .data$newRowId) %>% 
         dplyr::select(-dplyr::starts_with("newRowId"))
