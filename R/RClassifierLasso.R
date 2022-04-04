@@ -238,6 +238,12 @@ applyCrossValidationLassoInR <- function(dataMatrix, labels, hyperparamGrid, cov
   gridSearchPredictions <- list()
   length(gridSearchPredictions) <- length(lambdas)
   models <- list()
+  minPred <- NULL
+  
+  for(gridId in 1:length(lambdas)){
+    param <- fullModel$lambda[gridId]
+    gridSearchPredictions[[gridId]]$param <- data.frame(lambda = param) # assuming same lambdas for every index
+  }
   
   for(i in unique(folds$train$index)){
     
@@ -255,11 +261,7 @@ applyCrossValidationLassoInR <- function(dataMatrix, labels, hyperparamGrid, cov
     )
     
     pred <- data.frame(value = stats::predict(models[[i]], dataMatrix[validationIds,], type = "response"))
-    for(gridId in 1:length(lambdas)){
-      param <- models[[i]]$lambda[gridId]
-      gridSearchPredictions[[gridId]]$param <- data.frame(lambda = param) # assuming same lambdas converged for every index
-    }
-    for(gridId in 1:length(lambdas)){
+    for(gridId in 1:ncol(pred)){
       prediction <- labels[validationIds,]
       attr(prediction, "metaData") <- list(modelType = "binary") # make this some attribute of model
       prediction$value <- pred[,gridId]
@@ -271,13 +273,13 @@ applyCrossValidationLassoInR <- function(dataMatrix, labels, hyperparamGrid, cov
       # save hyper-parameter cv prediction
       gridSearchPredictions[[gridId]]$prediction <- rbind(gridSearchPredictions[[gridId]]$prediction, prediction)
     }
-    
+    minPred <- min(minPred, ncol(pred))
   }
   
   # computeGridPerformance function is currently in SklearnClassifier.R
   paramGridSearch <- lapply(gridSearchPredictions, function(x) do.call(computeGridPerformance, x))  # cvAUCmean, cvAUC, param
   
-  optimalParamInd <- which.max(unlist(lapply(paramGridSearch, function(x) x$cvPerformance)))
+  optimalParamInd <- which.max(unlist(lapply(paramGridSearch, function(x) x$cvPerformance))[1:minPred])
   
   finalParam <- paramGridSearch[[optimalParamInd]]$param
   
