@@ -34,7 +34,9 @@ fitSklearn <- function(
   
   start <- Sys.time()
   
-  if(!is.null(trainData$folds)){
+  # need this for computeGridPerformance
+  # add folds to labels if present:
+  if(!is.null(trainData$folds$validation)){
     trainData$labels <- merge(trainData$labels, 
                               merge(trainData$folds$train, trainData$folds$validation, all=TRUE),
                               by = 'rowId', all = TRUE)
