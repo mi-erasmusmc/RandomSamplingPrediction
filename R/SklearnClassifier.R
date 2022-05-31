@@ -23,9 +23,6 @@ fitSklearn <- function(
   analysisId,
   ...) {
   
-  # currently not possible to separate train and validation folds for Sklearn
-  trainData$folds <- trainData$folds$train
-  
   # check covariate data
   if(!FeatureExtraction::isCovariateData(trainData$covariateData)){stop("Needs correct covariateData")}
   
@@ -38,7 +35,9 @@ fitSklearn <- function(
   start <- Sys.time()
   
   if(!is.null(trainData$folds)){
-    trainData$labels <- merge(trainData$labels, trainData$fold, by = 'rowId')
+    trainData$labels <- merge(trainData$labels, 
+                              merge(trainData$folds$train, trainData$folds$validation, all=TRUE),
+                              by = 'rowId', all = TRUE)
   }
   
   # convert the data to a sparse R Matrix and then use reticulate to convert to python sparse
@@ -72,7 +71,8 @@ fitSklearn <- function(
       pythonClassifier = pySettings$pythonClassifier,
       modelLocation = outLoc,
       paramSearch = param,
-      saveToJson = pySettings$saveToJson
+      saveToJson = pySettings$saveToJson,
+      folds = trainData$folds
       )
     )
   
@@ -240,11 +240,12 @@ gridCvPython <- function(
   pythonClassifier,
   modelLocation,
   paramSearch,
-  saveToJson
+  saveToJson,
+  folds
   )
   {
   
-  ParallelLogger::logInfo(paste0("Rnning CV for ",modelName," model"))
+  ParallelLogger::logInfo(paste0("Running CV for ",modelName," model"))
  
   np <- reticulate::import('numpy')
   os <- reticulate::import('os')
@@ -271,15 +272,18 @@ gridCvPython <- function(
     # initiate prediction
     prediction <- c()
     
-    fold <- labels$index
-    ParallelLogger::logInfo(paste0('Max fold: ', max(fold)))
+    # fold <- labels$index
+    ParallelLogger::logInfo(paste0('Max fold: ', max((folds$train$index))))
     
-    for( i in 1:max(fold)){
+    for(i in unique(folds$train$index)){
+      
+      trainIds <- labels$originalRowId %in% folds$train[folds$train$index != i,]$rowId
+      validationIds <- labels$originalRowId %in% folds$validation[folds$validation$index == i,]$rowId
       
       ParallelLogger::logInfo(paste0('Fold ',i))
-      trainY <- reticulate::r_to_py(labels$outcomeCount[fold != i])
-      trainX <- reticulate::r_to_py(matrixData[fold != i,])
-      testX <- reticulate::r_to_py(matrixData[fold == i,])
+      trainY <- reticulate::r_to_py(labels$outcomeCount[trainIds])
+      trainX <- reticulate::r_to_py(matrixData[trainIds,])
+      testX <- reticulate::r_to_py(matrixData[validationIds,])
       
       if(requiresDenseMatrix){
         ParallelLogger::logInfo('Converting sparse martix to dense matrix (CV)')
@@ -290,7 +294,7 @@ gridCvPython <- function(
       model <- fitPythonModel(classifier, paramSearch[[gridId]], seed, trainX, trainY, np, pythonClassifier)
       
       ParallelLogger::logInfo("Calculating predictions on left out fold set...")
-      prediction <- rbind(prediction, predictValues(model = model, data = testX, cohort = labels[fold == i,], type = 'binary'))
+      prediction <- rbind(prediction, predictValues(model = model, data = testX, cohort = labels[validationIds,], type = 'binary'))
       
     }
     
@@ -313,8 +317,11 @@ gridCvPython <- function(
   
   ParallelLogger::logInfo('Training final model using optimal parameters')
   
-  trainY <- reticulate::r_to_py(labels$outcomeCount)
-  trainX <- reticulate::r_to_py(matrixData)
+  trainIds <- labels$originalRowId %in% folds$train$rowId
+  validationIds <- labels$originalRowId %in% folds$validation$rowId
+  
+  trainY <- reticulate::r_to_py(labels$outcomeCount[trainIds])
+  trainX <- reticulate::r_to_py(matrixData[trainIds,])
   
   if(requiresDenseMatrix){
     ParallelLogger::logInfo('Converting sparse martix to dense matrix (final model)')
@@ -324,7 +331,7 @@ gridCvPython <- function(
   model <- fitPythonModel(classifier, finalParam , seed, trainX, trainY, np, pythonClassifier)
   
   ParallelLogger::logInfo("Calculating predictions on all train data...")
-  prediction <- predictValues(model = model, data = trainX, cohort = labels, type = 'binary')
+  prediction <- predictValues(model = model, data = matrixData[validationIds,], cohort = labels[validationIds,], type = 'binary')
   prediction$evaluationType <- 'Train'
   
   prediction <- rbind(
