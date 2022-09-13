@@ -19,6 +19,7 @@ context("FeatureEngineering")
 
 
 trainData <- createTrainData(plpData, population)
+trainData$folds <- list(train = trainData$folds, validation = trainData$folds)
 
 testFEFun <- function(type = 'none'){
   
@@ -86,6 +87,7 @@ test_that("univariateFeatureSelection", {
 
 # refresh the training data
 trainData <- createTrainData(plpData, population)
+trainData$folds <- list(train = trainData$folds, validation = trainData$folds)
 
 test_that("createRandomForestFeatureSelection correct class", {
   ntreesTest <- sample(1000,1)

@@ -230,6 +230,9 @@ test_that("overSampleData works", {
   expect_true(
     nrow(sampleTrainData$covariateData$covariates %>% dplyr::collect() %>% dplyr::filter(.data$rowId %in% sampleTrainData$labels$rowId)) == nrow(sampleTrainData$covariateData$covariates)
   )
+  expect_true(
+    nrow(sampleTrainData$labels %>% dplyr::filter(.data$rowId %in% sampleTrainData$folds$train)) == nrow(sampleTrainData$labels)
+  )
   
   # test setting numberOutcomestoNonOutcomes = 0: the sampled data should be same as input
   
