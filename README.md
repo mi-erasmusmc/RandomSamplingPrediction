@@ -10,7 +10,7 @@ Features
 ========
 
 - Random oversampling and random undersampling applied to training folds within cross-validation only: [Sampling.R](https://github.com/mi-erasmusmc/RandomSamplingPrediction/blob/master/R/Sampling.R).
-- Recalibration based on target imbalance ratio random oversampling or random undersampling: [RecalibrateValidatePlp.R](https://github.com/mi-erasmusmc/RandomSamplingPrediction/blob/master/R/RecalibrateValidatePlp.R).
+- Recalibration based on target imbalance ratio used for random oversampling or random undersampling: [RecalibrateValidatePlp.R](https://github.com/mi-erasmusmc/RandomSamplingPrediction/blob/master/R/RecalibrateValidatePlp.R).
 
 
 Example code
