@@ -1,0 +1,215 @@
+{
+  "ExpressionLimit": {"Type": "All"},
+  "CollapseSettings": {
+    "CollapseType": "ERA",
+    "EraPad": 0
+  },
+  "CensorWindow": {
+    "StartDate": null,
+    "EndDate": null
+  },
+  "ConceptSets": [{
+    "expression": {"items": [
+      {
+        "isExcluded": true,
+        "concept": {
+          "INVALID_REASON_CAPTION": "Valid",
+          "CONCEPT_ID": 432908,
+          "STANDARD_CONCEPT": "S",
+          "CONCEPT_CODE": "29538005",
+          "VOCABULARY_ID": "SNOMED",
+          "CONCEPT_NAME": "Glaucomatocyclitic crisis",
+          "DOMAIN_ID": "Condition",
+          "STANDARD_CONCEPT_CAPTION": "Standard",
+          "CONCEPT_CLASS_ID": "Clinical Finding",
+          "INVALID_REASON": "V"
+        },
+        "includeMapped": false,
+        "includeDescendants": true
+      },
+      {
+        "isExcluded": false,
+        "concept": {
+          "INVALID_REASON_CAPTION": "Valid",
+          "CONCEPT_ID": 441561,
+          "STANDARD_CONCEPT": "S",
+          "CONCEPT_CODE": "50485007",
+          "VOCABULARY_ID": "SNOMED",
+          "CONCEPT_NAME": "Low tension glaucoma",
+          "DOMAIN_ID": "Condition",
+          "STANDARD_CONCEPT_CAPTION": "Standard",
+          "CONCEPT_CLASS_ID": "Clinical Finding",
+          "INVALID_REASON": "V"
+        },
+        "includeMapped": false,
+        "includeDescendants": true
+      },
+      {
+        "isExcluded": true,
+        "concept": {
+          "INVALID_REASON_CAPTION": "Valid",
+          "CONCEPT_ID": 4216823,
+          "STANDARD_CONCEPT": "S",
+          "CONCEPT_CODE": "81416004",
+          "VOCABULARY_ID": "SNOMED",
+          "CONCEPT_NAME": "Open angle with borderline findings",
+          "DOMAIN_ID": "Condition",
+          "STANDARD_CONCEPT_CAPTION": "Standard",
+          "CONCEPT_CLASS_ID": "Clinical Finding",
+          "INVALID_REASON": "V"
+        },
+        "includeMapped": false,
+        "includeDescendants": true
+      },
+      {
+        "isExcluded": false,
+        "concept": {
+          "INVALID_REASON_CAPTION": "Valid",
+          "CONCEPT_ID": 441284,
+          "STANDARD_CONCEPT": "S",
+          "CONCEPT_CODE": "84494001",
+          "VOCABULARY_ID": "SNOMED",
+          "CONCEPT_NAME": "Open-angle glaucoma",
+          "DOMAIN_ID": "Condition",
+          "STANDARD_CONCEPT_CAPTION": "Standard",
+          "CONCEPT_CLASS_ID": "Clinical Finding",
+          "INVALID_REASON": "V"
+        },
+        "includeMapped": false,
+        "includeDescendants": true
+      },
+      {
+        "isExcluded": true,
+        "concept": {
+          "INVALID_REASON_CAPTION": "Valid",
+          "CONCEPT_ID": 4072218,
+          "STANDARD_CONCEPT": "S",
+          "CONCEPT_CODE": "21928008",
+          "VOCABULARY_ID": "SNOMED",
+          "CONCEPT_NAME": "Secondary open-angle glaucoma",
+          "DOMAIN_ID": "Condition",
+          "STANDARD_CONCEPT_CAPTION": "Standard",
+          "CONCEPT_CLASS_ID": "Clinical Finding",
+          "INVALID_REASON": "V"
+        },
+        "includeMapped": false,
+        "includeDescendants": true
+      }
+    ]},
+    "name": "Open-angle glaucoma",
+    "id": 3
+  }],
+  "EndStrategy": {"DateOffset": {
+    "DateField": "StartDate",
+    "Offset": 0
+  }},
+  "cdmVersionRange": ">=5.0.0",
+  "CensoringCriteria": [],
+  "AdditionalCriteria": {
+    "CriteriaList": [{
+      "RestrictVisit": false,
+      "StartWindow": {
+        "UseEventEnd": false,
+        "Start": {
+          "Days": 1,
+          "Coeff": 1
+        },
+        "End": {
+          "Days": 365,
+          "Coeff": 1
+        },
+        "UseIndexEnd": false
+      },
+      "IgnoreObservationPeriod": false,
+      "EndWindow": null,
+      "Criteria": {"ConditionOccurrence": {
+        "OccurrenceEndDate": null,
+        "CorrelatedCriteria": null,
+        "ConditionTypeExclude": false,
+        "CodesetId": 3,
+        "ProviderSpecialty": [
+          {
+            "INVALID_REASON_CAPTION": "Unknown",
+            "CONCEPT_ID": 38004463,
+            "STANDARD_CONCEPT": null,
+            "CONCEPT_CODE": "18",
+            "VOCABULARY_ID": "Specialty",
+            "CONCEPT_NAME": "Ophthalmology",
+            "DOMAIN_ID": "Provider Specialty",
+            "STANDARD_CONCEPT_CAPTION": "Unknown",
+            "CONCEPT_CLASS_ID": null,
+            "INVALID_REASON": null
+          },
+          {
+            "INVALID_REASON_CAPTION": "Unknown",
+            "CONCEPT_ID": 38004481,
+            "STANDARD_CONCEPT": null,
+            "CONCEPT_CODE": "41",
+            "VOCABULARY_ID": "Specialty",
+            "CONCEPT_NAME": "Optometry",
+            "DOMAIN_ID": "Provider Specialty",
+            "STANDARD_CONCEPT_CAPTION": "Unknown",
+            "CONCEPT_CLASS_ID": null,
+            "INVALID_REASON": null
+          },
+          {
+            "INVALID_REASON_CAPTION": "Unknown",
+            "CONCEPT_ID": 38004701,
+            "STANDARD_CONCEPT": null,
+            "CONCEPT_CODE": "96",
+            "VOCABULARY_ID": "Specialty",
+            "CONCEPT_NAME": "Optician",
+            "DOMAIN_ID": "Provider Specialty",
+            "STANDARD_CONCEPT_CAPTION": "Unknown",
+            "CONCEPT_CLASS_ID": null,
+            "INVALID_REASON": null
+          }
+        ],
+        "Gender": null,
+        "VisitType": null,
+        "First": null,
+        "OccurrenceStartDate": null,
+        "ConditionType": null,
+        "ConditionSourceConcept": null,
+        "ConditionStatus": null,
+        "StopReason": null,
+        "Age": null
+      }},
+      "Occurrence": {
+        "Type": 2,
+        "CountColumn": null,
+        "IsDistinct": false,
+        "Count": 1
+      }
+    }],
+    "Type": "ALL",
+    "DemographicCriteriaList": [],
+    "Groups": [],
+    "Count": null
+  },
+  "QualifiedLimit": {"Type": "All"},
+  "InclusionRules": [],
+  "PrimaryCriteria": {
+    "CriteriaList": [{"ConditionOccurrence": {
+      "OccurrenceEndDate": null,
+      "CorrelatedCriteria": null,
+      "ConditionTypeExclude": false,
+      "CodesetId": 3,
+      "ProviderSpecialty": null,
+      "Gender": null,
+      "VisitType": null,
+      "First": null,
+      "OccurrenceStartDate": null,
+      "ConditionType": null,
+      "ConditionSourceConcept": null,
+      "ConditionStatus": null,
+      "StopReason": null,
+      "Age": null
+    }}],
+    "PrimaryCriteriaLimit": {"Type": "All"},
+    "ObservationWindow": {
+      "PostDays": 0,
+      "PriorDays": 0
+    }
+  }
+}

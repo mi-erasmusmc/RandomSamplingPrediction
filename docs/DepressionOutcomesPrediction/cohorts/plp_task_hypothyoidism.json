@@ -1,0 +1,108 @@
+{
+  "ExpressionLimit": {"Type": "All"},
+  "CollapseSettings": {
+    "CollapseType": "ERA",
+    "EraPad": 0
+  },
+  "CensorWindow": {
+    "StartDate": null,
+    "EndDate": null
+  },
+  "ConceptSets": [{
+    "expression": {"items": [{
+      "isExcluded": false,
+      "concept": {
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_ID": 140673,
+        "STANDARD_CONCEPT": "S",
+        "CONCEPT_CODE": "40930008",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_NAME": "Hypothyroidism",
+        "DOMAIN_ID": "Condition",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "CONCEPT_CLASS_ID": "Clinical Finding",
+        "INVALID_REASON": "V"
+      },
+      "includeMapped": false,
+      "includeDescendants": true
+    }]},
+    "name": "Hypothyroidism",
+    "id": 0
+  }],
+  "EndStrategy": {"DateOffset": {
+    "DateField": "StartDate",
+    "Offset": 0
+  }},
+  "cdmVersionRange": ">=5.0.0",
+  "CensoringCriteria": [],
+  "AdditionalCriteria": {
+    "CriteriaList": [{
+      "RestrictVisit": false,
+      "StartWindow": {
+        "UseEventEnd": false,
+        "Start": {
+          "Days": 0,
+          "Coeff": -1
+        },
+        "End": {
+          "Days": 90,
+          "Coeff": 1
+        },
+        "UseIndexEnd": false
+      },
+      "IgnoreObservationPeriod": false,
+      "EndWindow": null,
+      "Criteria": {"ConditionOccurrence": {
+        "OccurrenceEndDate": null,
+        "CorrelatedCriteria": null,
+        "ConditionTypeExclude": false,
+        "CodesetId": 0,
+        "ProviderSpecialty": null,
+        "Gender": null,
+        "VisitType": null,
+        "First": null,
+        "OccurrenceStartDate": null,
+        "ConditionType": null,
+        "ConditionSourceConcept": null,
+        "ConditionStatus": null,
+        "StopReason": null,
+        "Age": null
+      }},
+      "Occurrence": {
+        "Type": 2,
+        "CountColumn": null,
+        "IsDistinct": false,
+        "Count": 2
+      }
+    }],
+    "Type": "ALL",
+    "DemographicCriteriaList": [],
+    "Groups": [],
+    "Count": null
+  },
+  "QualifiedLimit": {"Type": "All"},
+  "InclusionRules": [],
+  "PrimaryCriteria": {
+    "CriteriaList": [{"ConditionOccurrence": {
+      "OccurrenceEndDate": null,
+      "CorrelatedCriteria": null,
+      "ConditionTypeExclude": false,
+      "CodesetId": 0,
+      "ProviderSpecialty": null,
+      "Gender": null,
+      "VisitType": null,
+      "First": null,
+      "OccurrenceStartDate": null,
+      "ConditionType": null,
+      "ConditionSourceConcept": null,
+      "ConditionStatus": null,
+      "StopReason": null,
+      "Age": null
+    }}],
+    "PrimaryCriteriaLimit": {"Type": "All"},
+    "ObservationWindow": {
+      "PostDays": 0,
+      "PriorDays": 0
+    }
+  }
+}

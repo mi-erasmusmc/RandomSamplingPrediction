@@ -1,0 +1,837 @@
+{
+  "ExpressionLimit": {"Type": "First"},
+  "CollapseSettings": {
+    "CollapseType": "ERA",
+    "EraPad": 0
+  },
+  "CensorWindow": {
+    "StartDate": null,
+    "EndDate": null
+  },
+  "ConceptSets": [
+    {
+      "expression": {"items": [
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 44507700,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "1455099",
+            "VOCABULARY_ID": "RxNorm",
+            "CONCEPT_NAME": "vortioxetine",
+            "DOMAIN_ID": "Drug",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Ingredient",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": true
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 19041910,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "38252",
+            "VOCABULARY_ID": "RxNorm",
+            "CONCEPT_NAME": "tianeptine",
+            "DOMAIN_ID": "Drug",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Ingredient",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": true
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 19084693,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "60842",
+            "VOCABULARY_ID": "RxNorm",
+            "CONCEPT_NAME": "reboxetine",
+            "DOMAIN_ID": "Drug",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Ingredient",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": true
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 19010652,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "30121",
+            "VOCABULARY_ID": "RxNorm",
+            "CONCEPT_NAME": "Moclobemide",
+            "DOMAIN_ID": "Drug",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Ingredient",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": true
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 43560354,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "1433212",
+            "VOCABULARY_ID": "RxNorm",
+            "CONCEPT_NAME": "levomilnacipran",
+            "DOMAIN_ID": "Drug",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Ingredient",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": true
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 21604686,
+            "STANDARD_CONCEPT": "C",
+            "CONCEPT_CODE": "N06A",
+            "VOCABULARY_ID": "ATC",
+            "CONCEPT_NAME": "ANTIDEPRESSANTS",
+            "DOMAIN_ID": "Drug",
+            "STANDARD_CONCEPT_CAPTION": "Classification",
+            "CONCEPT_CLASS_ID": "ATC 3rd",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": true
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 21500526,
+            "STANDARD_CONCEPT": "C",
+            "CONCEPT_CODE": "00000526",
+            "VOCABULARY_ID": "ETC",
+            "CONCEPT_NAME": "Antidepressants",
+            "DOMAIN_ID": "Drug",
+            "STANDARD_CONCEPT_CAPTION": "Classification",
+            "CONCEPT_CLASS_ID": "ETC",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": true
+        }
+      ]},
+      "name": "antidepressant",
+      "id": 1
+    },
+    {
+      "expression": {"items": [
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 374623,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "73097000",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Alcohol amnestic disorder",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": false
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 439147,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "48167000",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Amnesia",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": false
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 372608,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "3298001",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Amnestic disorder",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": false
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 380089,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "420146005",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Cerebral degeneration associated with generalized lipidosis",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": true
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 379006,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "2584003",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Cerebral degeneration in childhood",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": true
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 374906,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "16517004",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Cerebral lipidosis",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": true
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 440700,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "271569006",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Communicating hydrocephalus",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": false
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 375239,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "52522001",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Degenerative brain disorder",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": false
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 36903604,
+            "STANDARD_CONCEPT": "C",
+            "CONCEPT_CODE": "10012289",
+            "VOCABULARY_ID": "MedDRA",
+            "CONCEPT_NAME": "Dementia NEC",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Classification",
+            "CONCEPT_CLASS_ID": "HLT",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": true
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 374341,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "58756001",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Huntington's chorea",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": false
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 432899,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "30753002",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Normal pressure hydrocephalus",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": false
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 440385,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "230746009",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Obstructive hydrocephalus",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": false
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 374009,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "111479008",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Organic mental disorder",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": false
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 380375,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "36217008",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Organic personality disorder",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": false
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 4333667,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "231438001",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Presbyophrenic psychosis",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": false
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 373179,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "45864009",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Senile degeneration of brain",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": false
+        }
+      ]},
+      "name": "Dementia",
+      "id": 7
+    },
+    {
+      "expression": {"items": [
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 432590,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "48500005",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Delusional disorder",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": true
+        },
+        {
+          "isExcluded": true,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 434900,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "191483003",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Drug-induced psychosis",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": true
+        },
+        {
+          "isExcluded": true,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 375229,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "5510009",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Organic delusional disorder",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": false
+        },
+        {
+          "isExcluded": true,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 4333667,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "231438001",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Presbyophrenic psychosis",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": false
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 436073,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "69322001",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Psychotic disorder",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": true
+        },
+        {
+          "isExcluded": true,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 441540,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "191678001",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Reactive confusion",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": false
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 435783,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "58214004",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Schizophrenia",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": true
+        },
+        {
+          "isExcluded": true,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 380986,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "371024007",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Senile dementia with delusion",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": false
+        }
+      ]},
+      "name": "Psychosis",
+      "id": 8
+    },
+    {
+      "expression": {"items": [
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 436665,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "13746004",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Bipolar disorder",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": true
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 4333677,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "231494001",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Mania",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": true
+        },
+        {
+          "isExcluded": false,
+          "concept": {
+            "INVALID_REASON_CAPTION": "Valid",
+            "CONCEPT_ID": 437249,
+            "STANDARD_CONCEPT": "S",
+            "CONCEPT_CODE": "191590005",
+            "VOCABULARY_ID": "SNOMED",
+            "CONCEPT_NAME": "Recurrent manic episodes",
+            "DOMAIN_ID": "Condition",
+            "STANDARD_CONCEPT_CAPTION": "Standard",
+            "CONCEPT_CLASS_ID": "Clinical Finding",
+            "INVALID_REASON": "V"
+          },
+          "includeMapped": false,
+          "includeDescendants": true
+        }
+      ]},
+      "name": "Mania",
+      "id": 9
+    },
+    {
+      "expression": {"items": [{
+        "isExcluded": false,
+        "concept": {
+          "INVALID_REASON_CAPTION": "Valid",
+          "CONCEPT_ID": 4152280,
+          "STANDARD_CONCEPT": "S",
+          "CONCEPT_CODE": "370143000",
+          "VOCABULARY_ID": "SNOMED",
+          "CONCEPT_NAME": "Major depressive disorder",
+          "DOMAIN_ID": "Condition",
+          "STANDARD_CONCEPT_CAPTION": "Standard",
+          "CONCEPT_CLASS_ID": "Clinical Finding",
+          "INVALID_REASON": "V"
+        },
+        "includeMapped": false,
+        "includeDescendants": true
+      }]},
+      "name": "Major depressive disorder",
+      "id": 11
+    }
+  ],
+  "EndStrategy": {"DateOffset": {
+    "DateField": "StartDate",
+    "Offset": 0
+  }},
+  "cdmVersionRange": ">=5.0.0",
+  "CensoringCriteria": [],
+  "AdditionalCriteria": {
+    "CriteriaList": [
+      {
+        "RestrictVisit": false,
+        "StartWindow": {
+          "UseEventEnd": false,
+          "Start": {
+            "Days": 30,
+            "Coeff": -1
+          },
+          "End": {
+            "Days": 30,
+            "Coeff": 1
+          },
+          "UseIndexEnd": false
+        },
+        "IgnoreObservationPeriod": false,
+        "EndWindow": null,
+        "Criteria": {"DrugExposure": {
+          "OccurrenceEndDate": null,
+          "CorrelatedCriteria": null,
+          "DrugSourceConcept": null,
+          "CodesetId": 1,
+          "DrugTypeExclude": false,
+          "Quantity": null,
+          "DrugType": null,
+          "ProviderSpecialty": null,
+          "EffectiveDrugDose": null,
+          "Gender": null,
+          "DaysSupply": null,
+          "DoseUnit": null,
+          "VisitType": null,
+          "Refills": null,
+          "First": null,
+          "OccurrenceStartDate": null,
+          "RouteConcept": null,
+          "StopReason": null,
+          "LotNumber": null,
+          "Age": null
+        }},
+        "Occurrence": {
+          "Type": 2,
+          "CountColumn": null,
+          "IsDistinct": false,
+          "Count": 1
+        }
+      },
+      {
+        "RestrictVisit": false,
+        "StartWindow": {
+          "UseEventEnd": false,
+          "Start": {
+            "Days": null,
+            "Coeff": -1
+          },
+          "End": {
+            "Days": 1,
+            "Coeff": -1
+          },
+          "UseIndexEnd": false
+        },
+        "IgnoreObservationPeriod": false,
+        "EndWindow": null,
+        "Criteria": {"ConditionOccurrence": {
+          "OccurrenceEndDate": null,
+          "CorrelatedCriteria": null,
+          "ConditionTypeExclude": false,
+          "CodesetId": 8,
+          "ProviderSpecialty": null,
+          "Gender": null,
+          "VisitType": null,
+          "First": null,
+          "OccurrenceStartDate": null,
+          "ConditionType": null,
+          "ConditionSourceConcept": null,
+          "ConditionStatus": null,
+          "StopReason": null,
+          "Age": null
+        }},
+        "Occurrence": {
+          "Type": 0,
+          "CountColumn": null,
+          "IsDistinct": false,
+          "Count": 0
+        }
+      },
+      {
+        "RestrictVisit": false,
+        "StartWindow": {
+          "UseEventEnd": false,
+          "Start": {
+            "Days": null,
+            "Coeff": -1
+          },
+          "End": {
+            "Days": 1,
+            "Coeff": -1
+          },
+          "UseIndexEnd": false
+        },
+        "IgnoreObservationPeriod": false,
+        "EndWindow": null,
+        "Criteria": {"ConditionOccurrence": {
+          "OccurrenceEndDate": null,
+          "CorrelatedCriteria": null,
+          "ConditionTypeExclude": false,
+          "CodesetId": 9,
+          "ProviderSpecialty": null,
+          "Gender": null,
+          "VisitType": null,
+          "First": null,
+          "OccurrenceStartDate": null,
+          "ConditionType": null,
+          "ConditionSourceConcept": null,
+          "ConditionStatus": null,
+          "StopReason": null,
+          "Age": null
+        }},
+        "Occurrence": {
+          "Type": 0,
+          "CountColumn": null,
+          "IsDistinct": false,
+          "Count": 0
+        }
+      },
+      {
+        "RestrictVisit": false,
+        "StartWindow": {
+          "UseEventEnd": false,
+          "Start": {
+            "Days": null,
+            "Coeff": -1
+          },
+          "End": {
+            "Days": 1,
+            "Coeff": -1
+          },
+          "UseIndexEnd": false
+        },
+        "IgnoreObservationPeriod": false,
+        "EndWindow": null,
+        "Criteria": {"ConditionOccurrence": {
+          "OccurrenceEndDate": null,
+          "CorrelatedCriteria": null,
+          "ConditionTypeExclude": false,
+          "CodesetId": 7,
+          "ProviderSpecialty": null,
+          "Gender": null,
+          "VisitType": null,
+          "First": null,
+          "OccurrenceStartDate": null,
+          "ConditionType": null,
+          "ConditionSourceConcept": null,
+          "ConditionStatus": null,
+          "StopReason": null,
+          "Age": null
+        }},
+        "Occurrence": {
+          "Type": 0,
+          "CountColumn": null,
+          "IsDistinct": false,
+          "Count": 0
+        }
+      }
+    ],
+    "Type": "ALL",
+    "DemographicCriteriaList": [],
+    "Groups": [],
+    "Count": null
+  },
+  "QualifiedLimit": {"Type": "All"},
+  "InclusionRules": [],
+  "PrimaryCriteria": {
+    "CriteriaList": [{"ConditionOccurrence": {
+      "OccurrenceEndDate": null,
+      "CorrelatedCriteria": null,
+      "ConditionTypeExclude": false,
+      "CodesetId": 11,
+      "ProviderSpecialty": null,
+      "Gender": null,
+      "VisitType": null,
+      "First": true,
+      "OccurrenceStartDate": null,
+      "ConditionType": null,
+      "ConditionSourceConcept": null,
+      "ConditionStatus": null,
+      "StopReason": null,
+      "Age": null
+    }}],
+    "PrimaryCriteriaLimit": {"Type": "First"},
+    "ObservationWindow": {
+      "PostDays": 30,
+      "PriorDays": 365
+    }
+  }
+}
