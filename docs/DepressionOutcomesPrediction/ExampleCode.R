@@ -97,7 +97,7 @@ imbalance_ratios <- c(20,10,2,1)
 for (outcomeId in outcomeIds){
   
   try({
-    saveDirectory = paste0('DepressionOutcomesResults/')
+    saveDirectory = paste0('DepressionOutcomesResults/', database_name, "/", outcomeId)
     
     analysisId <- method
     sampleSettings <- createSampleSettings()
