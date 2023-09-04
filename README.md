@@ -16,7 +16,7 @@ Features
 Example code
 ============
 
-Code used to investigate the impact of random oversampling and random undersampling on the performance of prediction models developed using observational health data random oversampling and random undersampling: [ExampleCode.R](https://github.com/mi-erasmusmc/RandomSamplingPrediction/blob/master/docs/DepressionOutcomesPrediction/ExampleCode.R).
+Code used to investigate the impact of random oversampling and random undersampling on the performance of prediction models developed using observational health data: [ExampleCode.R](https://github.com/mi-erasmusmc/RandomSamplingPrediction/blob/master/docs/DepressionOutcomesPrediction/ExampleCode.R).
 
 Cohort definitions
 ==================
